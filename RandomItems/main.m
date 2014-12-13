@@ -7,11 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BNRItem.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        NSMutableArray *items = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < 10; i++) {
+            BNRItem *item = [BNRItem randomItem];
+            [items addObject:item];
+        }
+        
+        for (BNRItem *item in items) {
+            NSLog(@"%@", item);
+            NSLog(@"%s", object_getClassName(item));
+        }
+        
+        BNRItem *item = [[BNRItem alloc] initWithItemName:@"Fluffy Mac Spork" serialNumber:@"R2D2A"];
+        NSLog(@"%@", item);
+        
+        items = nil;
     }
     return 0;
 }
