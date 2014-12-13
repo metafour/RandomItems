@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BNRItem.h"
+#import "BNRContainer.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -20,13 +21,17 @@ int main(int argc, const char * argv[]) {
         
         for (BNRItem *item in items) {
             NSLog(@"%@", item);
-            NSLog(@"%s", object_getClassName(item));
         }
         
-        BNRItem *item = [[BNRItem alloc] initWithItemName:@"Fluffy Mac Spork" serialNumber:@"R2D2A"];
+        BNRItem *item = [BNRItem randomItem];
         NSLog(@"%@", item);
+        BNRContainer *subcontainer = [[BNRContainer alloc] initWithContainerName:@"Subcontainer" valueInDollars:500 serialNumber:@"SUBCONTAINER-1" item:item];
+        BNRContainer *container = [[BNRContainer alloc] initWithContainerName:@"Container" valueInDollars:1000 serialNumber:@"CONTAINER-1" item:item];
+        [container addItem:subcontainer];
+        NSLog(@"%@", container);
         
         items = nil;
+        container = nil;
     }
     return 0;
 }
